@@ -1,0 +1,1675 @@
+<!--
+======================================================================
+ ARCHIVO DOCUMENTADO (HTML + Bootstrap 5)
+ Proyecto: Taquería El Buen Taco — Menú
+ Autor: Profesor Efrén (comentado por ChatGPT)
+ Fecha: 2025-08-24
+ Convenciones de comentarios:
+   - Bloques explicativos ANTES de cada sección/elemento clave.
+   - Notas de accesibilidad (aria-*, roles), responsive y semántica.
+   - Sugerencias de mejora etiquetadas como [Sugerencia].
+======================================================================
+-->
+<!DOCTYPE html>
+<!-- Raíz del documento: idioma principal en español (lang="es") -->
+<html lang="es">
+
+<!-- HEAD: metadatos, SEO, recursos (CSS/JS) y estilos en línea -->
+
+<head>
+    <!-- =========================================================
+    META Y SEO
+    ---------------------------------------------------------
+    - charset: codificación UTF-8
+    - viewport: responsive en móviles
+    - title + metadatos para SEO
+    - Open Graph: previsualización al compartir
+    ========================================================= -->
+
+    <!-- Meta y SEO consistentes -->
+    <!-- Codificación: UTF-8 para caracteres internacionales -->
+    <meta charset="utf-8">
+    <!-- Viewport responsive para móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Título del documento para pestaña/navegadores -->
+    <title>Taquería El Buen Taco — Menú</title>
+    <link rel="canonical" href="https://ejemplo.tu-dominio.mx/menu">
+    <!-- Meta Description (SEO): resumen del contenido de la página -->
+    <meta name="description"
+        content="Menú de la Taquería El Buen Taco: tacos, especialidades, bebidas y postres. Precios en MXN.">
+    <!-- Autor del documento -->
+    <meta name="author" content="Profesor Efrén">
+    <!-- Palabras clave (SEO tradicional; impacto moderno limitado) -->
+    <meta name="keywords" content="taquería, tacos, especialidades, bebidas, postres, menú, México">
+
+
+    <!-- Open Graph -->
+    <!-- Open Graph: título para previsualizaciones al compartir -->
+    <meta property="og:title" content="Taquería El Buen Taco — Menú">
+    <!-- Open Graph: descripción para previsualizaciones al compartir -->
+    <meta property="og:description" content="Explora nuestro menú: tacos, especialidades, bebidas y postres.">
+    <!-- Open Graph: tipo de recurso (website) -->
+    <meta property="og:type" content="website">
+    <!-- Open Graph: configuración regional (es_MX) -->
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:image" content="https://i.ibb.co/0y5jKx7V/iconotaco.png">
+
+    <!-- Bootstrap 5.3.x CSS (un solo enlace) -->
+    <!-- Bootstrap 5 CSS desde CDN con SRI e integridad -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap 5 JS (bundle incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
+        defer></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <link rel="icon" href="/favicon.ico">
+
+    <!-- (Opcional) Tu hoja de estilos -->
+    <!-- [Opcional] Hoja de estilos propia para personalización -->
+    <!-- <link rel="stylesheet" href="sinestilos5.css"> -->
+
+    <!-- Estilos en línea: ajustes menores de layout/espaciados -->
+    <!-- [Sugerencia] Considera mover estos estilos a sinestilos5.css para caché y mantenimiento. -->
+    <style>
+        /* Ajustes ligeros */
+        body {
+            scroll-behavior: smooth;
+            padding-top: 110px;
+            /* compensa alert + navbar fixed-top */
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-top: 120px;
+            }
+        }
+
+        main {
+            min-height: 60vh;
+        }
+
+        aside nav a {
+            text-decoration: none;
+        }
+
+        .price {
+            font-weight: 600;
+        }
+
+        .section-divider {
+            border-top: 2px dashed #dee2e6;
+            margin: 2rem 0;
+        }
+
+
+        .mt-6 {
+            margin-top: 4rem !important;
+            /* Aproximadamente 64px — clase disponible si la necesitas */
+        }
+
+        /* Para pantallas menores a 600px */
+        @media (max-width: 599.98px) {
+            body {
+                background: #f2f2f2;
+            }
+        }
+
+        /* Para pantallas entre 600px y 899px */
+        @media (min-width: 600px) and (max-width: 899.98px) {
+            body {
+                background: #c8b6a6;
+            }
+        }
+
+        /* Para pantallas entre 900px y 1199px */
+        @media (min-width: 900px) and (max-width: 1199.98px) {
+            body {
+                background: #c7b3ff;
+            }
+        }
+
+        /* Para pantallas de 1200px o más */
+        @media (min-width: 1200px) {
+            body {
+                background: #ffb3b3;
+            }
+        }
+    </style>
+
+</head>
+
+<!-- BODY: todo el contenido visible de la página -->
+
+<body data-bs-spy="scroll" data-bs-target="#indiceMenu" data-bs-offset="120">
+    <!-- Header -->
+    <!-- =========================================================
+       HEADER
+       - Logo a la izquierda
+       - Menú principal a la derecha
+       ========================================================= -->
+    <!-- HEADER fijo: alerta superior + barra de navegación -->
+    <header class="bg-white border-bottom fixed-top">
+        <!-- Aviso superior fijo: usa <strong> para énfasis semántico -->
+        <div class="alert alert-warning text-center rounded-0 mb-0" role="alert">
+            ¡Atención! Próximamente abriremos una nueva sucursal en la zona de <strong>Pozos</strong>. ¡Espérala!
+        </div>
+        <!-- Navbar responsive: se expande en >= md; en móviles usa offcanvas -->
+        <nav class="navbar navbar-expand-md navbar-light bg-white py-md-3">
+            <div class="container-fluid">
+                <!-- Marca: logotipo + nombre del negocio -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="https://i.ibb.co/0y5jKx7V/iconotaco.png" alt="Logo de Taquería" width="50" height="50"
+                        class="me-2">
+                    <span class="fs-4 fw-bold">El Buen Taco</span>
+                </a>
+
+                <!-- Toggler móvil: abre el offcanvas lateral del menú -->
+                <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú principal visible en >= md (oculto en móviles) -->
+                <div class="collapse navbar-collapse d-none d-md-block" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#menu">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#promociones">Promociones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visitanos">Visítanos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Menú Offcanvas (móviles): navegación accesible dentro de panel lateral -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body pt-5">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#menu">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#promociones">Promociones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#visitanos">Visítanos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+
+                <!-- Índice rápido (móvil) -->
+                <hr class="my-3">
+                <p class="small text-uppercase text-muted mb-2">Índice rápido</p>
+                <ul class="list-unstyled">
+                    <li><a class="nav-link py-1" href="#ubicacion">📍 Ubicación</a></li>
+                    <li><a class="nav-link py-1" href="#promociones">🏷️ Promociones</a></li>
+                    <li><a class="nav-link py-1" href="#resenas">💬 Reseñas</a></li>
+                    <li><a class="nav-link py-1" href="#faq">❓ Preguntas frecuentes</a></li>
+                    <li><a class="nav-link py-1" href="#visitanos">🗺️ Visítanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout principal: Aside + Main -->
+    <!-- Layout principal: grid con aside (categorías) y main (contenido) -->
+    <div class="container mt-5 pt-5" id="inicio">
+        <div class="row g-4">
+            <!-- Aside lateral con categorías (enlace interno) -->
+            <!-- ASIDE: índice de categorías y datos útiles (sticky en escritorio) -->
+            <aside class="col-12 col-lg-3 d-none d-lg-block">
+                <div class="bg-white border rounded-3 p-3 position-sticky" style="top: 6rem;">
+                    <h2 class="h5 mb-3">Categorías</h2>
+                    <nav id="indiceMenu" aria-label="Índice del menú">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#ubicacion" class="link-danger">📍 Ubicación</a></li>
+                            <li class="list-group-item"><a href="#promociones" class="link-danger">🏷️ Promociones</a>
+                            </li>
+                            <li class="list-group-item"><a href="#resenas" class="link-danger">💬 Reseñas</a></li>
+                            <li class="list-group-item"><a href="#faq" class="link-danger">❓ Preguntas frecuentes</a>
+                            </li>
+                            <li class="list-group-item"><a href="#visitanos" class="link-dark">🗺️ Visítanos</a></li>
+                        </ul>
+                    </nav>
+
+                    <hr class="my-3">
+                    <div>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#horariosModal">
+                            Horarios 💡
+                        </button>
+                        <p class="mb-0 mt-2">Mar a Sáb 13:00 a 23:00<br>Dom 13:00 a 20:00</p>
+                    </div>
+
+                    <div class="mt-3">
+                        <p class="mb-1 text-uppercase small text-muted">Ubicación</p>
+                        <address class="mb-0">Periférico Poniente No. 3005, Morales, 78180 San Luis Potosí, S.L.P.
+                        </address>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main -->
+            <!-- MAIN: secciones principales del sitio -->
+            <main class="col-12 col-lg-9">
+                <!-- Bienvenida -->
+                <!-- Sección de bienvenida: título + subtítulo -->
+                <section class="bg-white border rounded-3 p-4 mb-4">
+                    <h1 class="h3">Bienvenido a <span class="text-danger">El Buen Taco</span></h1>
+                    <p class="mb-0 text-muted">Menú en línea: precios en MXN, porción individual. Pregunta por combos y
+                        paquetes familiares.</p>
+                </section>
+
+                <section>
+                    <!-- MENÚ con Nav Tabs: Tacos, Especialidades, Bebidas y Postres -->
+                    <section id="menu" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-menu">
+                        <h2 id="titulo-menu" class="h4 mb-3">Menú</h2>
+                        <!-- Controles de pestañas (role="tablist") para accesibilidad -->
+                        <ul class="nav nav-tabs nav-fill" id="menuTabs" role="tablist"
+                            aria-label="Pestañas de categorías">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="tacos-tab" data-bs-toggle="tab"
+                                    data-bs-target="#tacos-pane" type="button" role="tab" aria-controls="tacos-pane"
+                                    aria-selected="true">Tacos</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="especialidades-tab" data-bs-toggle="tab"
+                                    data-bs-target="#especialidades-pane" type="button" role="tab"
+                                    aria-controls="especialidades-pane" aria-selected="false">Especialidades</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="bebidas-tab" data-bs-toggle="tab"
+                                    data-bs-target="#bebidas-pane" type="button" role="tab" aria-controls="bebidas-pane"
+                                    aria-selected="false">Bebidas</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="postres-tab" data-bs-toggle="tab"
+                                    data-bs-target="#postres-pane" type="button" role="tab" aria-controls="postres-pane"
+                                    aria-selected="false">Postres</button>
+                            </li>
+                        </ul>
+
+                        <!-- Contenido de cada pestaña (tab-pane) -->
+                        <div class="tab-content pt-3" id="menuTabsContent">
+                            <!-- Pestaña Tacos: tarjetas responsivas con imagen 16:9 y CTA -->
+                            <div class="tab-pane fade show active" id="tacos-pane" role="tabpanel"
+                                aria-labelledby="tacos-tab" tabindex="0">
+                                <p class="text-muted">Tortilla de maíz con doble tortilla. Puedes agregar cebolla,
+                                    cilantro y salsa al gusto.</p>
+                                <div class="row row-cols-1 row-cols-md-2 g-4">
+                                    <div class="col">
+                                        <!-- Card: contenedor de imagen, título, descripción, precio y botón -->
+                                        <div class="card h-100">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="https://i.ibb.co/8kR21Jc/tacopastor.webp"
+                                                    class="card-img-top w-100 h-100 object-fit-cover"
+                                                    alt="Tacos al Pastor" loading="lazy">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Tacos al Pastor</h5>
+                                                <p class="card-text text-muted small">— con piña y adobo tradicional.
+                                                </p>
+                                                <p class="card-text"><strong class="price">$22</strong></p>
+                                                <button class="btn btn-danger btn-sm" type="button"
+                                                    data-producto="Tacos al Pastor" data-precio="22"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                                    aria-controls="offcanvasCart">
+                                                    Agregar al pedido
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="https://i.ibb.co/4nqrYC4c/tacochorizo.webp"
+                                                    class="card-img-top w-100 h-100 object-fit-cover"
+                                                    alt="Tacos de Chorizo" loading="lazy">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Tacos de Chorizo</h5>
+                                                <p class="card-text text-muted small">— el original de las Sevillanas.
+                                                </p>
+                                                <p class="card-text"><strong class="price">$22</strong></p>
+                                                <button class="btn btn-danger btn-sm" type="button"
+                                                    data-producto="Tacos de Chorizo" data-precio="22"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                                    aria-controls="offcanvasCart">
+                                                    Agregar al pedido
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="https://i.ibb.co/bgD4grXn/tacobistec.webp"
+                                                    class="card-img-top w-100 h-100 object-fit-cover"
+                                                    alt="Tacos de Bistec" loading="lazy">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Tacos de Bistec</h5>
+                                                <p class="card-text text-muted small">— asado a la plancha.</p>
+                                                <p class="card-text"><strong class="price">$24</strong></p>
+                                                <button class="btn btn-danger btn-sm" type="button"
+                                                    data-producto="Tacos de Bistec" data-precio="24"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                                    aria-controls="offcanvasCart">
+                                                    Agregar al pedido
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="https://i.ibb.co/sv3pmG8D/tacoalambre.webp"
+                                                    class="card-img-top w-100 h-100 object-fit-cover"
+                                                    alt="Tacos de Alambre" loading="lazy">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Tacos de Alambre</h5>
+                                                <p class="card-text text-muted small">— mezcla de carnes con pimientos.
+                                                </p>
+                                                <p class="card-text"><strong class="price">$24</strong></p>
+                                                <button class="btn btn-danger btn-sm" type="button"
+                                                    data-producto="Tacos de Alambre" data-precio="24"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                                    aria-controls="offcanvasCart">
+                                                    Agregar al pedido
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="especialidades-pane" role="tabpanel"
+                                aria-labelledby="especialidades-tab" tabindex="0">
+                                <p class="text-muted">Hechas a la plancha con queso Oaxaca. Tortilla de maíz o harina.
+                                </p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div><strong>Quesadillas</strong></div>
+                                        <span class="price">$36</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div><strong>Gringas</strong></div>
+                                        <span class="price">$38</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div><strong>Volcanes</strong></div>
+                                        <span class="price">$42</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div><strong>Costras</strong></div>
+                                        <span class="price">$45</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane fade" id="bebidas-pane" role="tabpanel" aria-labelledby="bebidas-tab"
+                                tabindex="0">
+                                <div class="row row-cols-1 row-cols-md-2 g-2">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>Coca‑Cola</span><span class="price">$20</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>Fanta</span><span class="price">$20</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>Sprite</span><span class="price">$20</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between"><span>Agua
+                                                    Ciel</span><span class="price">$18</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between"><span>Cerveza
+                                                    Corona</span><span class="price">$35</span></li>
+                                            <li class="list-group-item d-flex justify-content-between"><span>Cerveza
+                                                    Victoria</span><span class="price">$35</span></li>
+                                            <li class="list-group-item d-flex justify-content-between"><span>Agua de
+                                                    Jamaica</span><span class="price">$22</span></li>
+                                            <li class="list-group-item d-flex justify-content-between"><span>Agua de
+                                                    Horchata</span><span class="price">$22</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="postres-pane" role="tabpanel" aria-labelledby="postres-tab"
+                                tabindex="0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between"><span>Pay de
+                                            piña</span><span class="price">$35</span></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span>Pay de
+                                            nuez</span><span class="price">$40</span></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span>Flan</span><span
+                                            class="price">$30</span></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span>Pastel</span><span
+                                            class="price">$38</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                </section>
+
+
+
+                <hr class="section-divider">
+
+                <!-- Pedido -->
+                <!-- Hacer Pedido: botón abre modal de pedido para llevar -->
+                <section id="pedido" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-pedido">
+                    <h2 id="titulo-pedido" class="h4 mb-3">Hacer Pedido</h2>
+                    <p class="text-muted">¿Prefieres ordenar para llevar? Haz clic en el botón y llena tus datos.</p>
+                    <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal"
+                        data-bs-target="#pedidoModal">
+                        ¡Hacer Pedido para llevar!
+                    </button>
+                </section>
+
+                <!-- Promociones (base, sin JS) -->
+                <!-- Promociones: carrusel Bootstrap con indicadores, items y controles -->
+                <section id="promociones" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-promos">
+                    <h2 id="titulo-promos" class="h4 mb-3">Promociones</h2>
+                    <!-- Carousel: data-bs-ride="carousel" activa el autoplay -->
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                                aria-label="Slide 4"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="ratio ratio-16x9">
+                                    <img src="https://i.ibb.co/99XbJND6/costra.webp"
+                                        class="d-block w-100 h-100 object-fit-cover" alt="Promoción Especial 1"
+                                        loading="lazy">
+                                </div>
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-2">
+                                    <h5>Jueves de Costras al 2x1</h5>
+                                    <p>¡No te pierdas nuestra increíble promoción!</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="ratio ratio-16x9">
+                                    <img src="https://i.ibb.co/ynkncdsj/gringa.webp"
+                                        class="d-block w-100 h-100 object-fit-cover" alt="Promoción Especial 2"
+                                        loading="lazy">
+                                </div>
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-2">
+                                    <h5>Miércoles de Gringas a Precio Especial</h5>
+                                    <p>Disfruta nuestras Gringas de Pastor con un descuento del 30%.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="ratio ratio-16x9">
+                                    <img src="https://i.ibb.co/FbsvpxR1/parrilada.webp"
+                                        class="d-block w-100 h-100 object-fit-cover" alt="Promoción Especial 3"
+                                        loading="lazy">
+                                </div>
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-2">
+                                    <h5>Fin de Semana Familiar: ¡Parrillada Especial!</h5>
+                                    <p>El paquete perfecto para compartir en familia con descuento.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="ratio ratio-16x9">
+                                    <img src="https://i.ibb.co/bqHGzXF/horchata.webp"
+                                        class="d-block w-100 h-100 object-fit-cover" alt="Promoción Especial 4"
+                                        loading="lazy">
+                                </div>
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-2">
+                                    <h5>Miércoles Agua de Horchata gratis</h5>
+                                    <p>Válido en la compra de 5 tacos o dos Especialidades.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Reseñas (base, sin JS) -->
+                <!-- Reseñas: botón abre un modal con lista de opiniones -->
+                <section id="resenas" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-resenas">
+                    <h2 id="titulo-resenas" class="h4 mb-3">Reseñas</h2>
+                    <p class="text-muted">Da clic para ver lo que nuestros clientes opinan de nosotros.</p>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#resenasModal">
+                        Ver reseñas
+                    </button>
+                </section>
+
+                <!-- Preguntas frecuentes (base, sin JS) -->
+                <!-- FAQ: acordeón con preguntas frecuentes (colapsables) -->
+                <section id="faq" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-faq">
+                    <h2 id="titulo-faq" class="h4 mb-3">Preguntas frecuentes</h2>
+                    <!-- Contenedor del acordeón (id para data-bs-parent) -->
+                    <div class="accordion" id="accordionFAQ">
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    ¿Tienen servicio a domicilio?
+                                </button>
+                            </h3>
+                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body">
+                                    Sí, contamos con servicio de entrega a domicilio en un radio de 5km. Puedes hacer tu
+                                    pedido a través de nuestra página web o por teléfono.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    ¿Cuáles son sus horarios de atención?
+                                </button>
+                            </h3>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body">
+                                    Estamos abiertos de martes a sábado de 13:00 a 23:00 y los domingos de 13:00 a
+                                    20:00.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    ¿Aceptan tarjetas de crédito?
+                                </button>
+                            </h3>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body">
+                                    Sí, aceptamos todas las tarjetas de crédito y débito, además de pagos con QR y
+                                    efectivo.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Visítanos (mapa) -->
+                <!-- Visítanos: botón que despliega un mapa embebido (Google Maps) -->
+                <section id="visitanos" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-visitanos">
+                    <h2 id="titulo-visitanos" class="h4 mb-3">Visítanos</h2>
+                    <p class="text-muted">Da clic en el botón para ver nuestra ubicación en el mapa.</p>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#mapaCollapse" aria-expanded="false" aria-controls="mapaCollapse">
+                        Mostrar Mapa
+                    </button>
+                    <!-- Contenido colapsable del mapa; ratio 16:9 para responsividad -->
+                    <div class="collapse" id="mapaCollapse">
+                        <div class="card card-body mt-3">
+                            <div class="ratio ratio-16x9">
+                                <!-- [Sugerencia] Puedes añadir loading="lazy" a iframes en navegadores compatibles para rendimiento. -->
+                                <iframe title="Ubicación de El Buen Taco en Google Maps"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783986.266303676!2d-105.64578911250003!3d22.152684400000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842a9ed475b82567%3A0x48642ba37a1671c1!2sEBC%20-%20Campus%20San%20Luis%20Potos%C3%AD!5e0!3m2!1ses-419!2smx!4v1756059647901!5m2!1ses-419!2smx"
+                                    style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contacto -->
+                <!-- Contacto: correo mailto y teléfono -->
+                <section id="contacto" class="bg-white border rounded-3 p-4 mb-4" aria-labelledby="titulo-contacto">
+                    <h2 id="titulo-contacto" class="h4 mb-3">Contacto</h2>
+                    <p class="text-muted">Escríbenos a <a href="mailto:hola@elbuentaco.mx">hola@elbuentaco.mx</a> o
+                        llámanos al <a href="tel:+524440000000">444 000 0000</a>
+                    </p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer (con ancla #ubicacion) -->
+    <!-- FOOTER: derechos reservados + ancla a #inicio -->
+    <footer class="bg-white border-top">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-8" id="ubicacion">
+                    <p class="mb-0 small text-muted">© 2025 Taquería El Buen Taco — Todos los derechos reservados.</p>
+                    <address>Av. del Sabor #123, Col. Centro, SLP</address>
+                </div>
+                <div class="col-12 col-md-4 text-md-end">
+                    <a href="#inicio" class="link-danger small">Volver al inicio ↑</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: Horarios de Atención (desplegable con info de apertura) -->
+    <div class="modal fade" id="horariosModal" tabindex="-1" aria-labelledby="horariosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="horariosModalLabel">Horarios de Atención</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¡Atención! Cerramos los <strong>Lunes</strong> para mantenimiento y descanso. Los esperamos el
+                        resto de la semana.</p>
+                    <p>Horarios habituales:</p>
+                    <ul>
+                        <li><strong>Martes a Sábado:</strong> 13:00 a 23:00</li>
+                        <li><strong>Domingo:</strong> 13:00 a 20:00</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Reseñas (scrollable) -->
+    <div class="modal fade" id="resenasModal" tabindex="-1" aria-labelledby="resenasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resenasModalLabel">Opiniones de Nuestros Clientes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Juan P.</strong> - ⭐⭐⭐⭐⭐
+                            <p class="mb-0 text-muted small">"Los mejores tacos al pastor que he probado en mi vida. El
+                                servicio es rapidísimo."</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Ana G.</strong> - ⭐⭐⭐⭐
+                            <p class="mb-0 text-muted small">"El lugar es muy agradable y las gringas están deliciosas.
+                                ¡Volveré pronto!"</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Carlos M.</strong> - ⭐⭐⭐⭐⭐
+                            <p class="mb-0 text-muted small">"Excelente relación calidad-precio. La salsa de habanero es
+                                increíblemente buena."</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Sofía R.</strong> - ⭐⭐⭐⭐⭐
+                            <p class="mb-0 text-muted small">"Siempre es mi primera opción para tacos. La calidad de la
+                                carne es superior."</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Luis F.</strong> - ⭐⭐⭐
+                            <p class="mb-0 text-muted small">"Los tacos de bistec son buenos, pero el servicio fue un
+                                poco lento. Aun así, vale la pena."</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas de carrito: ejemplo estático, conectar con JS para funcionalidad real -->
+    <!-- Offcanvas: Carrito de compras (ejemplo estático) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">Tu Pedido</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body pt-5" role="region" aria-live="polite" aria-atomic="true">
+            <ul id="cartItems" class="list-group mb-3"></ul>
+            <div class="d-flex justify-content-between align-items-center border-top pt-2 mb-3">
+                <span>Total (MXN)</span>
+                <strong id="cartTotal">$0</strong>
+            </div>
+
+            <div class="mb-3">
+                <fieldset>
+                    <legend class="form-label d-block mb-2">Adiciones para tus tacos</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="conCebollaOff" name="adiciones_off[]"
+                            value="cebolla">
+                        <label class="form-check-label" for="conCebollaOff">Con cebolla</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="conCilantroOff" name="adiciones_off[]"
+                            value="cilantro">
+                        <label class="form-check-label" for="conCilantroOff">Con cilantro</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="conSalsaOff" name="adiciones_off[]"
+                            value="salsa">
+                        <label class="form-check-label" for="conSalsaOff">Con salsa</label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <button type="button" class="btn btn-primary d-block w-100" id="confirmarPedidoBtn">Confirmar
+                Pedido</button>
+
+            <p class="text-muted small mt-2">
+                *Este es un ejemplo estático. La funcionalidad de agregar productos requiere JavaScript.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Modal: Formulario de pedido para llevar -->
+    <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pedidoModalLabel">Completa tus datos para el pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="pedidoForm" class="needs-validation" novalidate>
+                        <input type="hidden" id="cartJson" name="cart_json" value="">
+                        <input type="hidden" id="cartTotalInput" name="cart_total" value="">
+                        <input type="hidden" id="itemNombres" name="item_nombre[]" value="">
+                        <input type="hidden" id="itemCantidades" name="item_cantidad[]" value="">
+                        <input type="hidden" id="itemPrecios" name="item_precio[]" value="">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required
+                                autocomplete="name" />
+                            <div class="invalid-feedback">Indica tu nombre completo.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" required
+                                autocomplete="tel" inputmode="tel" pattern="[0-9\s\-()+]{7,}" />
+                            <div class="invalid-feedback">Ingresa un teléfono válido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="direccion" name="direccion" rows="3" required></textarea>
+                            <div class="invalid-feedback">La dirección es requerida.</div>
+                        </div>
+                        <!-- Selección guiada por categoría/producto -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6">
+                                <label for="categoriaSelect" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaSelect" name="categoria" required>
+                                    <option value="" selected disabled>Elige una categoría</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una categoría.</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="productoSelect" class="form-label">Producto</label>
+                                <select class="form-select" id="productoSelect" name="producto" required disabled>
+                                    <option value="" selected disabled>Elige un producto</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona un producto.</div>
+                            </div>
+                        </div>
+                        <!-- Constructor de carrito dentro del formulario -->
+                        <div class="row g-3 align-items-end mb-3">
+                            <div class="col-sm-4">
+                                <label for="cantidadForm" class="form-label">Cantidad</label>
+                                <input type="number" id="cantidadForm" class="form-control" min="1" step="1" value="1"
+                                    disabled>
+                            </div>
+                            <div class="col-sm-8 d-grid d-sm-flex gap-2">
+                                <button type="button" id="formAddBtn" class="btn btn-success" disabled>Agregar al
+                                    carrito</button>
+                                <button type="button" id="formClearBtn" class="btn btn-outline-danger">Vaciar
+                                    carrito</button>
+                            </div>
+                        </div>
+
+                        <!-- Resumen del carrito (solo lectura para verificación antes de enviar) -->
+                        <div class="mb-3">
+                            <label class="form-label">Resumen del carrito</label>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped align-middle mb-2">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50%">Producto</th>
+                                            <th style="width:15%">Precio</th>
+                                            <th style="width:15%">Cantidad</th>
+                                            <th style="width:20%" class="text-end">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cartSummaryBody">
+                                        <tr>
+                                            <td colspan="4" class="text-muted">Tu carrito está vacío.</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3">Total</th>
+                                            <th class="text-end" id="cartSummaryTotal">$0</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="form-text">Este resumen se llena automáticamente con lo que tengas en el
+                                carrito.</div>
+                        </div>
+
+
+
+                        <fieldset class="mb-3">
+                            <legend class="form-label d-block mb-2">Adiciones para tus tacos</legend>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="conCebollaForm"
+                                    name="adiciones_form[]" value="cebolla">
+                                <label class="form-check-label" for="conCebollaForm">Con cebolla</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="conCilantroForm"
+                                    name="adiciones_form[]" value="cilantro">
+                                <label class="form-check-label" for="conCilantroForm">Con cilantro</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="conSalsaForm"
+                                    name="adiciones_form[]" value="salsa">
+                                <label class="form-check-label" for="conSalsaForm">Con salsa</label>
+                            </div>
+                        </fieldset>
+
+                        <div class="mb-3">
+                            <label for="comentarios" class="form-label">Comentarios adicionales (opcional)</label>
+                            <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="enviarPedidoBtn">Enviar Pedido</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+    <!-- Script mínimo para leer checkboxes (demo) -->
+    <script>
+        (function () {
+            function getChecked(selector) {
+                return Array.from(document.querySelectorAll(selector)).filter(el => el.checked).map(el => el.value);
+            }
+
+            // Offcanvas
+            const confirmar = document.getElementById('confirmarPedidoBtn');
+            if (confirmar) {
+                confirmar.addEventListener('click', () => {
+                    const adiciones = getChecked('input[name="adiciones_off[]"]');
+                    alert('Pedido confirmado. Adiciones (offcanvas): ' + (adiciones.join(', ') || 'ninguna'));
+                });
+            }
+
+            // Modal form
+            const enviar = document.getElementById('enviarPedidoBtn');
+            if (enviar) {
+                enviar.addEventListener('click', () => {
+                    const adiciones = getChecked('#pedidoModal input[name="adiciones_form[]"]');
+                    alert('Pedido enviado. Adiciones (formulario): ' + (adiciones.join(', ') || 'ninguna'));
+                });
+            }
+        })();
+    </script>
+
+
+    <!-- Validación Bootstrap para el formulario del pedido -->
+    <script>
+        (function () {
+            'use strict';
+            const form = document.getElementById('pedidoForm');
+            if (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        const data = new FormData(form);
+                        const nombre = data.get('nombre');
+                        alert('¡Gracias ' + nombre + '! Tu pedido ha sido enviado.');
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            }
+        })();
+    </script>
+
+
+    <!-- =========================================================
+         CARRITO DINÁMICO (JS) — Documentado y no invasivo
+         Ubicación: al final del documento para no bloquear render ni interferir con tu código actual.
+         Funcionalidad:
+          - Detecta clics en botones con data-producto y data-precio.
+          - Agrega ítems al carrito (combina por producto+precio).
+          - Renderiza la lista en el offcanvas #offcanvasCart.
+          - Calcula y muestra el total en #cartTotal.
+          - Persiste en localStorage bajo la clave "cart".
+         Accesibilidad:
+          - El contenedor del offcanvas tiene aria-live="polite": al actualizar, los lectores anuncian los cambios.
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            // Utilidades
+            const $ = (sel, root = document) => root.querySelector(sel);
+            const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+            const MXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+
+            // Estado del carrito (en memoria)
+            let cart = [];
+
+            // Cargar del localStorage al iniciar
+            function loadCart() {
+                try {
+                    const raw = localStorage.getItem('cart');
+                    cart = raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    cart = [];
+                }
+            }
+
+            function saveCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+
+            function addItem(nombre, precio) {
+                precio = Number(precio) || 0;
+                // Buscar si ya existe el mismo producto con el mismo precio
+                const idx = cart.findIndex(it => it.nombre === nombre && it.precio === precio);
+                if (idx >= 0) {
+                    cart[idx].qty += 1;
+                } else {
+                    cart.push({ nombre, precio, qty: 1 });
+                }
+                renderCart();
+            }
+
+            function removeItem(index) {
+                if (index >= 0 && index < cart.length) {
+                    cart.splice(index, 1);
+                    renderCart();
+                }
+            }
+
+            function changeQty(index, delta) {
+                if (index >= 0 && index < cart.length) {
+                    cart[index].qty += delta;
+                    if (cart[index].qty <= 0) cart.splice(index, 1);
+                    renderCart();
+                }
+            }
+
+            function cartTotal() {
+                return cart.reduce((acc, it) => acc + it.precio * it.qty, 0);
+            }
+
+            // Render del listado en #cartItems
+            function renderCart() {
+                const list = $('#cartItems');
+                const totalEl = $('#cartTotal');
+                if (!list || !totalEl) return;
+
+                // Limpiar lista
+                list.innerHTML = '';
+
+                if (cart.length === 0) {
+                    list.innerHTML = '<li class="list-group-item text-muted">Tu carrito está vacío.</li>';
+                } else {
+                    cart.forEach((it, index) => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                        li.innerHTML = `
+              <div class="me-3">
+                <div class="fw-semibold">${it.nombre}</div>
+                <small class="text-muted">${MXN.format(it.precio)} c/u</small>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-action="decrement" data-index="${index}" aria-label="Quitar uno">−</button>
+                <span aria-live="polite" aria-atomic="true">${it.qty}</span>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-action="increment" data-index="${index}" aria-label="Agregar uno">+</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" data-action="remove" data-index="${index}" aria-label="Eliminar del carrito">×</button>
+              </div>
+            `;
+                        list.appendChild(li);
+                    });
+                }
+
+                // Actualizar total
+                totalEl.textContent = MXN.format(cartTotal());
+
+                // Guardar
+                saveCart();
+            }
+
+            // Delegación de eventos para los botones dentro del carrito
+            function bindCartControls() {
+                const list = $('#cartItems');
+                if (!list) return;
+                list.addEventListener('click', (ev) => {
+                    const btn = ev.target.closest('button[data-action]');
+                    if (!btn) return;
+                    const index = Number(btn.dataset.index);
+                    const action = btn.dataset.action;
+                    if (action === 'increment') changeQty(index, +1);
+                    if (action === 'decrement') changeQty(index, -1);
+                    if (action === 'remove') removeItem(index);
+                });
+            }
+
+            // Captura de clic en botones "Agregar al pedido"
+            function bindAddToCartButtons() {
+                // Selecciona cualquier botón con data-producto + data-precio
+                const btns = $$('button[data-producto][data-precio]');
+                btns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Lee de data-*; si faltara, intenta inferir del DOM más cercano
+                        const nombre = btn.dataset.producto || btn.closest('.card')?.querySelector('.card-title')?.textContent?.trim() || 'Producto';
+                        const precio = btn.dataset.precio || btn.closest('.card')?.textContent?.match(/(\d+[.,]?\d*)/)?.[1] || 0;
+                        addItem(nombre, precio);
+                    });
+                });
+            }
+
+            // Inicialización
+            document.addEventListener('DOMContentLoaded', function () {
+                loadCart();
+                renderCart();
+                bindCartControls();
+                bindAddToCartButtons();
+            });
+        })();
+    </script>
+
+
+    <!-- =========================================================
+         SELECTS DEPENDIENTES: Categoría → Producto
+         Ubicación: parte final del documento (después del carrito dinámico),
+         para no interferir con el render y mantener tu código ordenado.
+
+         ¿Qué hace?
+         - Define un catálogo simple en memoria (puedes moverlo a un JSON).
+         - Llena el <select id="categoriaSelect"> con las categorías.
+         - Al cambiar la categoría, llena <select id="productoSelect"> con
+           los productos correspondientes y lo habilita.
+         - Ambos selects están marcados como required para integrarse con
+           la validación de Bootstrap que ya tienes.
+
+         ¿Cómo adaptarlo?
+         - Cambia/expande CATALOGO según tu menú real.
+         - Si ya tienes precios por producto, puedes crear un mapa
+           { "Tacos": [{nombre:"Pastor", precio:22}, ...] } y, al elegir
+           producto, guardar el precio en un input hidden.
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            // Catálogo base (puedes alimentarlo desde tu backend o JSON externo)
+            const CATALOGO = {
+                "Tacos": ["Tacos al Pastor", "Tacos de Bistec", "Tacos de Chorizo", "Tacos de Alambre"],
+                "Especialidades": ["Quesadillas", "Gringas", "Volcanes", "Costras"],
+                "Bebidas": ["Coca‑Cola", "Fanta", "Sprite", "Agua Ciel", "Cerveza Corona", "Cerveza Victoria", "Agua de Jamaica", "Agua de Horchata"],
+                "Postres": ["Pay de piña", "Pay de nuez", "Flan", "Pastel"]
+            };
+
+            const catSel = document.getElementById('categoriaSelect');
+            const prodSel = document.getElementById('productoSelect');
+
+            function fillCategories() {
+                if (!catSel) return;
+                // Evitar duplicados si se llama más de una vez
+                if (catSel.options.length <= 1) {
+                    Object.keys(CATALOGO).forEach(cat => {
+                        catSel.add(new Option(cat, cat));
+                    });
+                }
+            }
+
+            function fillProductsFor(cat) {
+                if (!prodSel) return;
+                prodSel.innerHTML = '<option value="" selected disabled>Elige un producto</option>';
+                const items = CATALOGO[cat] || [];
+                items.forEach(p => prodSel.add(new Option(p, p)));
+                prodSel.disabled = items.length === 0;
+            }
+
+            // Eventos
+            catSel?.addEventListener('change', (e) => {
+                fillProductsFor(e.target.value);
+            });
+
+            // Inicialización
+            document.addEventListener('DOMContentLoaded', () => {
+                fillCategories();
+                // Si ya hay una categoría seleccionada (por ejemplo por autocompletar), popular productos
+                if (catSel && catSel.value) {
+                    fillProductsFor(catSel.value);
+                }
+            });
+        })();
+    </script>
+
+
+    <!-- =========================================================
+         INTEGRACIÓN OFFCANVAS → MODAL (Confirmar Pedido)
+         - Lee el carrito desde localStorage ("cart")
+         - Serializa a JSON en <input id="cartJson">
+         - Prefija los selects de Categoría/Producto según el primer ítem del carrito
+         - Abre el modal #pedidoModal programáticamente
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            // Mapa de categorías → productos (mantener en sync con los selects dependientes)
+            const CATALOGO = {
+                "Tacos": ["Tacos al Pastor", "Tacos de Bistec", "Tacos de Chorizo", "Tacos de Alambre"],
+                "Especialidades": ["Quesadillas", "Gringas", "Volcanes", "Costras"],
+                "Bebidas": ["Coca‑Cola", "Fanta", "Sprite", "Agua Ciel", "Cerveza Corona", "Cerveza Victoria", "Agua de Jamaica", "Agua de Horchata"],
+                "Postres": ["Pay de piña", "Pay de nuez", "Flan", "Pastel"]
+            };
+
+            const confirmarBtn = document.getElementById('confirmarPedidoBtn');
+            const pedidoModalEl = document.getElementById('pedidoModal');
+
+            function getCartFromStorage() {
+                try {
+                    const raw = localStorage.getItem('cart');
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            function findCategoryForProduct(productName) {
+                for (const [cat, productos] of Object.entries(CATALOGO)) {
+                    if (productos.includes(productName)) return cat;
+                }
+                return '';
+            }
+
+            function prefillSelectsFromCart(cart) {
+                const catSel = document.getElementById('categoriaSelect');
+                const prodSel = document.getElementById('productoSelect');
+                if (!catSel || !prodSel || cart.length === 0) return;
+
+                // Tomamos el primer ítem del carrito como referencia
+                const first = cart[0];
+                const categoria = findCategoryForProduct(first?.nombre || '');
+                if (!categoria) return;
+
+                // Setear categoría y disparar change para poblar productos
+                catSel.value = categoria;
+                // Forzar el disparo de 'change' para que el otro script cargue los productos
+                const changeEvent = new Event('change', { bubbles: true });
+                catSel.dispatchEvent(changeEvent);
+
+                // Asignar producto si existe en el catálogo actual
+                // Dar un pequeño delay para asegurar que el otro script ya pobló el select
+                setTimeout(() => {
+                    const option = Array.from(prodSel.options).find(o => o.value === first.nombre);
+                    if (option) {
+                        prodSel.disabled = false;
+                        prodSel.value = first.nombre;
+                    }
+                }, 0);
+            }
+
+            function openPedidoModal() {
+                // Requiere Bootstrap 5 bundle
+                if (window.bootstrap && pedidoModalEl) {
+                    const modal = bootstrap.Modal.getOrCreateInstance(pedidoModalEl);
+                    modal.show();
+                } else if (pedidoModalEl) {
+                    // Fallback: usa atributo data-bs-toggle en un botón temporal
+                    pedidoModalEl.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            confirmarBtn?.addEventListener('click', function () {
+                const cart = getCartFromStorage();
+                // Serializar carrito en input hidden para enviarlo con el formulario
+                const cartInput = document.getElementById('cartJson');
+                if (cartInput) {
+                    cartInput.value = JSON.stringify(cart);
+                }
+                // Prefill selects en el formulario
+                prefillSelectsFromCart(cart);
+                // Abrir modal
+                openPedidoModal();
+            });
+        })();
+    </script>
+
+
+    <!-- =========================================================
+         RESUMEN Y PAYLOAD DEL CARRITO EN EL FORMULARIO
+         - Rellena tabla #cartSummaryBody y #cartSummaryTotal al abrir el modal
+         - Pone en inputs ocultos:
+             * cart_json: JSON completo del carrito
+             * cart_total: total numérico (MXN)
+             * item_nombre[], item_cantidad[], item_precio[] (valores separados por coma para backend simple)
+         - Refresca también al enviar el formulario por si el usuario abrió el modal manualmente
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            const MXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+
+            function getCart() {
+                try {
+                    const raw = localStorage.getItem('cart');
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) { return []; }
+            }
+            function total(cart) { return cart.reduce((a, it) => a + (Number(it.precio) || 0) * (Number(it.qty) || 0), 0); }
+
+            function fillHiddenFields(cart) {
+                const cartJson = document.getElementById('cartJson');
+                const cartTotalInput = document.getElementById('cartTotalInput');
+                const nombres = document.getElementById('itemNombres');
+                const cantidades = document.getElementById('itemCantidades');
+                const precios = document.getElementById('itemPrecios');
+
+                if (cartJson) cartJson.value = JSON.stringify(cart);
+                if (cartTotalInput) cartTotalInput.value = String(total(cart));
+
+                // Para backends sencillos: exportamos listas separadas por coma
+                if (nombres) nombres.value = cart.map(it => it.nombre).join(',');
+                if (cantidades) cantidades.value = cart.map(it => it.qty).join(',');
+                if (precios) precios.value = cart.map(it => it.precio).join(',');
+            }
+
+            function renderSummary(cart) {
+                const tbody = document.getElementById('cartSummaryBody');
+                const totalEl = document.getElementById('cartSummaryTotal');
+                if (!tbody || !totalEl) return;
+
+                tbody.innerHTML = '';
+                if (!cart.length) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-muted">Tu carrito está vacío.</td></tr>';
+                } else {
+                    cart.forEach(it => {
+                        const tr = document.createElement('tr');
+                        const sub = (Number(it.precio) || 0) * (Number(it.qty) || 0);
+                        tr.innerHTML = `
+              <td>${it.nombre}</td>
+              <td>${MXN.format(it.precio)}</td>
+              <td>${it.qty}</td>
+              <td class="text-end">${MXN.format(sub)}</td>
+            `;
+                        tbody.appendChild(tr);
+                    });
+                }
+                totalEl.textContent = MXN.format(total(cart));
+            }
+
+            // Al abrir el modal, sincronizamos resumen + hidden fields
+            document.addEventListener('shown.bs.modal', function (ev) {
+                if (ev.target && ev.target.id === 'pedidoModal') {
+                    const cart = getCart();
+                    renderSummary(cart);
+                    fillHiddenFields(cart);
+                }
+            });
+
+            // También al enviar el formulario (por si se abrió manualmente)
+            const form = document.getElementById('pedidoForm');
+            form?.addEventListener('submit', function () {
+                const cart = getCart();
+                fillHiddenFields(cart);
+            });
+        })();
+    </script>
+
+
+    <!-- =========================================================
+         CARRITO DESDE EL FORMULARIO (selección manual)
+         - Usa los mismos selects de Categoría/Producto + cantidad
+         - Agrega al carrito global (localStorage:"cart")
+         - Actualiza el resumen del modal y los inputs ocultos
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+            const MXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+            const catSel = document.getElementById('categoriaSelect');
+            const prodSel = document.getElementById('productoSelect');
+            const qtyInput = document.getElementById('cantidadForm');
+            const addBtn = document.getElementById('formAddBtn');
+            const clearBtn = document.getElementById('formClearBtn');
+
+            // Construimos un mapa de precios a partir de los botones del catálogo (si existen)
+            const priceMap = {};
+            document.querySelectorAll('button[data-producto][data-precio]').forEach(btn => {
+                const nombre = btn.dataset.producto;
+                const precio = Number(btn.dataset.precio) || 0;
+                if (nombre) priceMap[nombre] = precio;
+            });
+            // Normalizador: tolera acentos/mayúsculas/espacios para coincidir nombres
+            const norm = s => (s || "")
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            // Añadir claves normalizadas a lo aprendido de las cards
+            Object.entries({ ...priceMap }).forEach(([nombre, precio]) => {
+                priceMap[norm(nombre)] = precio;
+            });
+
+            // Precios de respaldo para productos que no vienen de las cards
+            const PRICE_TABLE = {
+                "Tacos al Pastor": 22,
+                "Tacos de Bistec": 24,
+                "Tacos de Chorizo": 22,
+                "Tacos de Alambre": 24,
+                "Quesadillas": 36,
+                "Gringas": 38,
+                "Volcanes": 42,
+                "Costras": 45,
+                "Coca‑Cola": 20,
+                "Fanta": 20,
+                "Sprite": 20,
+                "Agua Ciel": 18,
+                "Cerveza Corona": 35,
+                "Cerveza Victoria": 35,
+                "Agua de Jamaica": 22,
+                "Agua de Horchata": 22,
+                "Pay de piña": 35,
+                "Pay de nuez": 40,
+                "Flan": 30,
+                "Pastel": 38
+            };
+            Object.entries(PRICE_TABLE).forEach(([nombre, precio]) => {
+                if (!(nombre in priceMap)) priceMap[nombre] = precio;
+                const n = norm(nombre);
+                if (!(n in priceMap)) priceMap[n] = precio;
+            });
+
+
+            function getCart() {
+                try { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+                catch (e) { return []; }
+            }
+            function saveCart(cart) {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            function total(cart) { return cart.reduce((a, it) => a + (Number(it.precio) || 0) * (Number(it.qty) || 0), 0); }
+
+            function renderSummary(cart) {
+                const tbody = document.getElementById('cartSummaryBody');
+                const totalEl = document.getElementById('cartSummaryTotal');
+                if (!tbody || !totalEl) return;
+                tbody.innerHTML = '';
+                if (!cart.length) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-muted">Tu carrito está vacío.</td></tr>';
+                } else {
+                    cart.forEach(it => {
+                        const tr = document.createElement('tr');
+                        const sub = (Number(it.precio) || 0) * (Number(it.qty) || 0);
+                        tr.innerHTML = `
+              <td>${it.nombre}</td>
+              <td>${MXN.format(it.precio)}</td>
+              <td>${it.qty}</td>
+              <td class="text-end">${MXN.format(sub)}</td>
+            `;
+                        tbody.appendChild(tr);
+                    });
+                }
+                totalEl.textContent = MXN.format(total(cart));
+            }
+
+            function fillHiddenFields(cart) {
+                const cartJson = document.getElementById('cartJson');
+                const cartTotalInput = document.getElementById('cartTotalInput');
+                const nombres = document.getElementById('itemNombres');
+                const cantidades = document.getElementById('itemCantidades');
+                const precios = document.getElementById('itemPrecios');
+
+                if (cartJson) cartJson.value = JSON.stringify(cart);
+                if (cartTotalInput) cartTotalInput.value = String(total(cart));
+                if (nombres) nombres.value = cart.map(it => it.nombre).join(',');
+                if (cantidades) cantidades.value = cart.map(it => it.qty).join(',');
+                if (precios) precios.value = cart.map(it => it.precio).join(',');
+            }
+
+            function mergeItem(cart, nombre, precio, qty) {
+                precio = Number(precio) || 0;
+                qty = Math.max(1, Number(qty) || 1);
+                const idx = cart.findIndex(it => it.nombre === nombre && it.precio === precio);
+                if (idx >= 0) cart[idx].qty += qty;
+                else cart.push({ nombre, precio, qty });
+            }
+
+            function ensureControlsState() {
+                const canUse = !!prodSel?.value;
+                qtyInput.disabled = !canUse;
+                addBtn.disabled = !canUse;
+            }
+
+            // Habilitar controles cuando haya producto seleccionado
+            catSel?.addEventListener('change', ensureControlsState);
+            prodSel?.addEventListener('change', ensureControlsState);
+
+            // Agregar al carrito desde el formulario
+            addBtn?.addEventListener('click', function () {
+                const nombre = prodSel?.value;
+                if (!nombre) return;
+                const n = norm(nombre);
+                const precio = (nombre in priceMap) ? priceMap[nombre] : ((n in priceMap) ? priceMap[n] : 0);
+                const qty = Number(qtyInput?.value || 1);
+                const cart = getCart();
+                mergeItem(cart, nombre, precio, qty);
+                saveCart(cart);
+                renderSummary(cart);
+                fillHiddenFields(cart);
+                // Feedback rápido
+                addBtn.disabled = true;
+                setTimeout(() => { addBtn.disabled = false; }, 400);
+            });
+
+            // Vaciar carrito
+            clearBtn?.addEventListener('click', function () {
+                const empty = [];
+                saveCart(empty);
+                renderSummary(empty);
+                fillHiddenFields(empty);
+            });
+
+            // Inicialización al cargar modal (si ya hay selección previa)
+            document.addEventListener('DOMContentLoaded', ensureControlsState);
+        })();
+    </script>
+
+
+    <!-- Toasts de confirmación/errores -->
+    <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+        <div id="liveToast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle">Aviso</strong>
+                <small>Ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div class="toast-body" id="toastBody">Mensaje</div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================
+         FINALIZACIÓN DE PEDIDO
+         - Requiere Bootstrap 5 (Modal/Offcanvas/Toast)
+         - Valida que el carrito NO esté vacío antes de enviar
+         - Si válido: limpia carrito, actualiza UI y cierra modal/offcanvas
+       ========================================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            const MXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+            const form = document.getElementById('pedidoForm');
+            const pedidoModalEl = document.getElementById('pedidoModal');
+            const offcanvasEl = document.getElementById('offcanvasCart');
+
+            function getCart() {
+                try { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+                catch (e) { return []; }
+            }
+            function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
+            function total(cart) { return cart.reduce((a, it) => a + (Number(it.precio) || 0) * (Number(it.qty) || 0), 0); }
+
+            function showToast(title, msg, variant) {
+                // variant: 'success' | 'danger' | 'info'
+                const toastEl = document.getElementById('liveToast');
+                const titleEl = document.getElementById('toastTitle');
+                const bodyEl = document.getElementById('toastBody');
+                if (!toastEl || !titleEl || !bodyEl) return;
+                titleEl.textContent = title || 'Aviso';
+                bodyEl.textContent = msg || '';
+                // set bg for body via classes
+                toastEl.classList.remove('text-bg-success', 'text-bg-danger', 'text-bg-info');
+                if (variant === 'success') toastEl.classList.add('text-bg-success');
+                else if (variant === 'danger') toastEl.classList.add('text-bg-danger');
+                else if (variant === 'info') toastEl.classList.add('text-bg-info');
+                const toast = bootstrap.Toast.getOrCreateInstance(toastEl);
+                toast.show();
+            }
+
+            function renderOffcanvasEmpty() {
+                const list = document.getElementById('cartItems');
+                const totalEl = document.getElementById('cartTotal');
+                if (list) list.innerHTML = '<li class="list-group-item text-muted">Tu carrito está vacío.</li>';
+                if (totalEl) totalEl.textContent = MXN.format(0);
+            }
+
+            function renderModalSummaryEmpty() {
+                const tbody = document.getElementById('cartSummaryBody');
+                const totalEl = document.getElementById('cartSummaryTotal');
+                if (tbody) tbody.innerHTML = '<tr><td colspan="4" class="text-muted">Tu carrito está vacío.</td></tr>';
+                if (totalEl) totalEl.textContent = MXN.format(0);
+            }
+
+            function clearHiddenFields() {
+                ['cartJson', 'cartTotalInput', 'itemNombres', 'itemCantidades', 'itemPrecios'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = '';
+                });
+            }
+
+            // Interceptar envío del formulario para validar carrito y limpiar al éxito
+            form?.addEventListener('submit', function (ev) {
+                const cart = getCart();
+                if (!cart.length) {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    showToast('Carrito vacío', 'Agrega al menos un producto antes de enviar tu pedido.', 'danger');
+                    return;
+                }
+
+                // Si llegamos aquí, asumimos que la validación HTML5/Bootstrap fue OK
+                ev.preventDefault();
+                ev.stopImmediatePropagation();
+
+                // "Enviar" simulado: aquí iría fetch() o submit real
+                // Limpiar carrito y UI
+                saveCart([]);
+                renderOffcanvasEmpty();
+                renderModalSummaryEmpty();
+                clearHiddenFields();
+                form.reset();
+                form.classList.remove('was-validated');
+
+                // Cerrar modal y offcanvas si están abiertos
+                if (window.bootstrap) {
+                    const modal = bootstrap.Modal.getOrCreateInstance(pedidoModalEl);
+                    modal.hide();
+                    const off = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                    off.hide();
+                }
+
+                showToast('Pedido enviado', '¡Gracias! Tu pedido fue recibido.', 'success');
+            });
+        })();
+    </script>
+
+    <!-- ======================= S14: MEDIA QUERIES ======================= -->
+    <section id="media-queries" class="mb-5">
+        <h2>2) Media queries</h2>
+        <p class="step">Cambia el tamaño de la ventana y observa el color de fondo del <span
+                class="code">&lt;body&gt;</span>.</p>
+        <div class="demo-box fit-viewport rounded">
+            <div>
+                <p class="mb-2">Ejemplo de reglas utilizadas:</p>
+                <pre class="code m-0">
+/* &lt; 600px */       @media (max-width: 599.98px){ body{ background:#f2f2f2; } }
+/* 600–899px */     @media (min-width: 600px) and (max-width: 899.98px){ body{ background:#c8b6a6; } }
+/* 900–1199px */    @media (min-width: 900px) and (max-width: 1199.98px){ body{ background:#c7b3ff; } }
+/* ≥ 1200px */      @media (min-width: 1200px){ body{ background:#ffb3b3; } }
+          </pre>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
